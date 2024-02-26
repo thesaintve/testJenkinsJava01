@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:productDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=false
+    driver-class-name: org.h2.Driver
+    platform: h2
+    username: sa
+    password:
+    initialization-mode: always
+
+  jpa:
+    show_sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+jwt:
+  expiration: 3600000  # 1 hora en milisegundos
+
+validation:
+  password-pattern: "^(?=(?:.*?[A-Z]){1})(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,12}$"
+  password-pattern-msg: "El password debe tener Sólo una letra mayúscula, dos números y un rango de 8 a 12 caracteres"
+
+server:
+  port: 8091
